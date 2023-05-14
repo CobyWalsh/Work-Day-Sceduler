@@ -1,6 +1,67 @@
+const saveButton = document.getElementById("save-btn");
+const past = document.getElementById("past");
+const present = document.getElementById("present");
+const future = document.getElementById("future");
+const rows = document.getElementsByClassName("row");
+const toDO = document.getElementById("todo");
+const toDoInput = document.getElementById("todo-input");
+const toDoSave = document.getElementById("todo-save");
+const toDoForm = document.getElementById("todo-form");
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+Array.from(rows).forEach(row => {
+  let
+    rowIdString = row.id,
+    rowHour;
+  if (rowIdString) {
+    rowHour = parseInt(rowIdString);
+  }
+  if (rowHour) {
+    // Compares row id to current hour and sets color accordingly
+    if (currentHour === rowHour) {
+      setColor(row, "red");
+    } else if ((currentHour < rowHour) && (currentHour > rowHour - 6)) {
+      setColor(row, "green");
+    } else if ((currentHour > rowHour) && (currentHour < rowHour + 6)) {
+      setColor(row, "lightgrey");
+    } else {
+      setColor(row, "white");
+    }
+  }
+});
+
+let toDoStorage = localStorage.getItem("todo")
+  ? JSON.parse(localStorage.getItem("todo"))
+  : [];
+
+ toDoForm.addEventListener("todo-save", (e) => {
+    e.preventDefault();
+    toDoStorage.push(toDoInput.value);
+    localStorage.setItem("todo", JSON.stringify(toDoStorage));
+    listBuilder(toDoInput.value);
+    toDoInput.value = "";
+  });
+
+  const listBuilder = (text) => {
+    const note = document.createElement("li");
+    note.innerHTML = text + ' <button onclick="deleteNote(this)">x</button>';
+    toDO.appendChild(note);
+  };
+
+  const getNotes = JSON.parse(localStorage.getItem("todo"));
+getNotes.forEach((note) => {
+  listBuilder(note);
+});
+
+const deleteNote = (btn) => {
+  let el = btn.parentNode;
+  const index = [...el.parentElement.children].indexOf(el);
+  notesStorage.splice(index, 1);
+  localStorage.setItem("todo", JSON.stringify(notesStorage));
+  el.remove();
+};
+
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
