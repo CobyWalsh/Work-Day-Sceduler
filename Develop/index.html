@@ -30,6 +30,25 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
+
+    <div id="clock"></div>
+    <div id="date"></div>
+
+  <script>
+    // Get the clock element
+    const clock = document.getElementById("clock");
+    const dateElement = document.getElementById("date");
+    // Update the clock every second
+    setInterval(() => {
+      // Get the current time using Day.js
+      const currentTime = dayjs().format("HH:mm:ss");
+      const currentDate = dayjs().format("YYYY-MM-DD");
+      // Update the clock element with the current time
+      clock.textContent = currentTime;
+      dateElement.textContent = currentDate;
+    }, 1000);
+  </script>
+
     <div class="container-fluid px-5">
       <!-- Use class for "past", "present", and "future" to apply styles to the
         time-block divs accordingly. The javascript will need to do this by
