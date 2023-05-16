@@ -3,8 +3,16 @@ body {
   font-size: 16px;
 }
 
-.clock {
-  
+#clock {
+  text-align: center;
+  color: blue;
+  font-size: xx-large;
+}
+
+#date {
+  text-align: center;
+  color: blueviolet;
+  font-size: xx-large;
 }
 
 textarea {
