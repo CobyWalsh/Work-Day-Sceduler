@@ -1,6 +1,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+  background-color: aquamarine;
 }
 
 #clock {
@@ -41,13 +42,13 @@ textarea {
 }
 
 .hour {
-  background-color: #ffffff;
+  background-color: #f4f4f1;
   color: #000000;
   border-top: 1px dashed #000000;
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: yellow;
   color: white;
 }
 

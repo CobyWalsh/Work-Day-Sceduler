@@ -11,74 +11,70 @@ const toDoForm = document.getElementById("todo-form");
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-$( document ) .ready (function () {
+$(document).ready(function () {
   const date = dayjs();
-console.log(date);
-let day = date.date();
-console.log(day);
-let month = date.month() + 1
-let year = date.year()
-let time = date.valueOf()
+  console.log(date);
+  let day = date.date();
+  console.log(day);
+  let month = date.month() + 1
+  let year = date.year()
+  let time = date.valueOf()
 
-let fullDate = '${month}-${day}-${year}-${time}'
-console.log(month, year, time,fullDate);
+  let fullDate = '${month}-${day}-${year}-${time}'
+  console.log(month, year, time, fullDate);
 
-function upDateSchedule() {
-  Array.from(rows).forEach(row => {
-    let
-      rowIdString = row.id,
-      rowHour;
-    if (rowIdString) {
-      rowHour = parseInt(rowIdString);
-    }
-    if (rowHour) {
-      // Compares row id to current hour and sets color accordingly
-      if (currentHour === rowHour) {
-        setColor(row, "red");
-      } else if ((currentHour < rowHour) && (currentHour > rowHour - 6)) {
-        setColor(row, "green");
-      } else if ((currentHour > rowHour) && (currentHour < rowHour + 6)) {
-        setColor(row, "lightgrey");
+  $(document).ready(function () {
+    // Get the current hour using the built-in Date object
+    var currentHour = new Date().getHours();
+
+    // Loop through each time block
+    $('.time-block').each(function () {
+      var timeBlockHour = parseInt($(this).attr('id').split('-')[1]);
+
+      // Compare the time block hour with the current hour
+      if (timeBlockHour < currentHour) {
+        $(this).addClass('past');
+      } else if (timeBlockHour === currentHour) {
+        $(this).addClass('present');
       } else {
-        setColor(row, "white");
+        $(this).addClass('future');
       }
-    }
-  });
-}
-
-function addToDO() {
-  let toDoStorage = localStorage.getItem("todo")
-    ? JSON.parse(localStorage.getItem("todo"))
-    : [];
-
-  toDoForm.addEventListener("todo-save", (e) => {
-   console.log("clicked save button")
-    e.preventDefault();
-    toDoStorage.push(toDoInput.value);
-    localStorage.setItem("todo", JSON.stringify(toDoStorage));
-    listBuilder(toDoInput.value);
-    toDoInput.value = "";
+    });
   });
 
-  const listBuilder = (text) => {
-    const note = document.createElement("li");
-    note.innerHTML = text + ' <button onclick="deleteNote(this)">x</button>';
-    toDO.appendChild(note);
-  };
+  function addToDO() {
+    let toDoStorage = localStorage.getItem("todo")
+      ? JSON.parse(localStorage.getItem("todo"))
+      : [];
 
-  const getNotes = JSON.parse(localStorage.getItem("todo"));
-  getNotes.forEach((note) => {
-    listBuilder(note);
-  });
+    toDoForm.addEventListener("todo-save", (e) => {
+      console.log("clicked save button")
+      e.preventDefault();
+      toDoStorage.push(toDoInput.value);
+      localStorage.setItem("todo", JSON.stringify(toDoStorage));
+      listBuilder(toDoInput.value);
+      toDoInput.value = "";
+    });
 
-  const deleteNote = (btn) => {
-    let el = btn.parentNode;
-    const index = [...el.parentElement.children].indexOf(el);
-    notesStorage.splice(index, 1);
-    localStorage.setItem("todo", JSON.stringify(notesStorage));
-    el.remove();
-  };
-}
+    const listBuilder = (text) => {
+      const note = document.createElement("li");
+      note.innerHTML = text + ' <button onclick="deleteNote(this)">x</button>';
+      toDO.appendChild(note);
+    };
+
+    const getNotes = JSON.parse(localStorage.getItem("todo"));
+    getNotes.forEach((note) => {
+      listBuilder(note);
+    });
+
+    const deleteNote = (btn) => {
+      let el = btn.parentNode;
+      const index = [...el.parentElement.children].indexOf(el);
+      notesStorage.splice(index, 1);
+      localStorage.setItem("todo", JSON.stringify(notesStorage));
+      el.remove();
+    };
+  }
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
