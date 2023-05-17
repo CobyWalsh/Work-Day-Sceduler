@@ -3,10 +3,6 @@ const past = document.getElementById("past");
 const present = document.getElementById("present");
 const future = document.getElementById("future");
 const rows = document.getElementsByClassName("row");
-const toDO = document.getElementById("todo");
-const toDoInput = document.getElementById("todo-input");
-const toDoSave = document.getElementById("todo-save");
-const toDoForm = document.getElementById("todo-form");
 
 // This section of code creates the dynamic current time and date desplayed on the webpage
 $(document).ready(function () {
