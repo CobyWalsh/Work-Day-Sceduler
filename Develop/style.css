@@ -1,15 +1,19 @@
+/*I set the body of the webpage to a font size of 16px with an Open Sans font and a aquamarine background*/
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   background-color: aquamarine;
+  text-align: center;
 }
 
+/*I center the clock in the center of the webpage with xx-large font and a text color of blue*/
 #clock {
   text-align: center;
   color: blue;
   font-size: xx-large;
 }
 
+/*I centered in the center of the webpage with xx-large font and an blue violet text color*/
 #date {
   text-align: center;
   color: blueviolet;
@@ -47,16 +51,19 @@ textarea {
   border-top: 1px dashed #000000;
 }
 
+/*I set time block in the past to a background color of yellow and text color of white*/
 .past {
   background-color: yellow;
   color: white;
 }
 
+/*I set time block in the present to a background color of #ff6961 and text color of white*/
 .present {
   background-color: #ff6961;
   color: white;
 }
 
+/*I set time block in the future to a background color of #77dd77 and text color of white*/
 .future {
   background-color: #77dd77;
   color: white;

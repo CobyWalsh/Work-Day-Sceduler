@@ -7,10 +7,8 @@ const toDO = document.getElementById("todo");
 const toDoInput = document.getElementById("todo-input");
 const toDoSave = document.getElementById("todo-save");
 const toDoForm = document.getElementById("todo-form");
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 
+// This section of code creates the dynamic current time and date desplayed on the webpage
 $(document).ready(function () {
   const date = dayjs();
   console.log(date);
@@ -23,15 +21,11 @@ $(document).ready(function () {
   let fullDate = '${month}-${day}-${year}-${time}'
   console.log(month, year, time, fullDate);
 
+  // This section of code works with the changing color of past, present and future in the time blocks
   $(document).ready(function () {
-    // Get the current hour using the built-in Date object
     var currentHour = new Date().getHours();
-
-    // Loop through each time block
     $('.time-block').each(function () {
       var timeBlockHour = parseInt($(this).attr('id').split('-')[1]);
-
-      // Compare the time block hour with the current hour
       if (timeBlockHour < currentHour) {
         $(this).addClass('past');
       } else if (timeBlockHour === currentHour) {
@@ -42,6 +36,7 @@ $(document).ready(function () {
     });
   });
 
+  // This section of code creates the save button function and makes sure it is opporating correctly using jQuery
   $(document).ready(function () {
     const timeBlocks = $(".time-block");
 
